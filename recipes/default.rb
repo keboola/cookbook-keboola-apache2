@@ -17,6 +17,7 @@ user "apache" do
   gid "apache"
 end
 
+include_recipe "aws"
 include_recipe "apache2"
 
 # apache2 cookbook fix (runs service[packageName] -> httpd24)
