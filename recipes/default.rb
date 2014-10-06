@@ -25,6 +25,9 @@ r = resources(service: 'apache2')
 r.service_name('httpd')
 
 
+apache_default_template = resources(:template => "apache2.conf")
+apache_default_template.cookbook "keboola-apache2"
+
 unless node['apache']['listen_ports'].include?('443')
   node.set['apache']['listen_ports'] = node['apache']['listen_ports'] + ['443']
 end
