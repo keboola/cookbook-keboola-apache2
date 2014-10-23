@@ -139,11 +139,11 @@ ErrorLog "|/usr/bin/logger -t '<%= node.name %>_err'  -p local1.info"
 LogLevel warn
 
 <IfModule log_config_module>
-    LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" combined
+    LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\" \"%{X-KBC-RunId}i\"" combined
     LogFormat "%h %l %u %t \"%r\" %>s %b" common
 
     <IfModule logio_module>
-      LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\" %I %O" combinedio
+      LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\" \"%{X-KBC-RunId}i\" %I %O" combinedio
     </IfModule>
 
     CustomLog "|/usr/bin/logger -t 'apache_<%= node.name %>'  -p local1.info" combined
@@ -207,8 +207,8 @@ Include <%= node['apache']['dir'] %>/ports.conf
 # The following directives define some format nicknames for use with
 # a CustomLog directive (see below).
 #
-LogFormat "%v:%p %h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" vhost_combined
-LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" combined
+LogFormat "%v:%p %h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\" \"%{X-KBC-RunId}i\"" vhost_combined
+LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\" \"%{X-KBC-RunId}i\"" combined
 LogFormat "%h %l %u %t \"%r\" %>s %b" common
 LogFormat "%{Referer}i -> %U" referer
 LogFormat "%{User-agent}i" agent
