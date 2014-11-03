@@ -76,8 +76,9 @@ end
 
 execute "extract-certificates" do
   command "tar --strip 1 -C #{node['apache']['dir']}/ssl -xf  /tmp/ssl-keboola.com.tar.gz"
+  user "root"
+  group "root"
 end
-
 
 directory "/www" do
   owner "root"
