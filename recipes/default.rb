@@ -62,7 +62,7 @@ apache_sysconfig_template.cookbook "keboola-apache2"
 
 aws_s3_file "/tmp/ssl-keboola.com.tar.gz" do
   bucket "keboola-configs"
-  remote_path "certificates/ssl-keboola.com.tar.gz"
+  remote_path "certificates/ssl-keboola.com-2014-11.tar.gz"
   aws_access_key_id node[:aws][:aws_access_key_id]
   aws_secret_access_key node[:aws][:aws_secret_access_key]
 end
