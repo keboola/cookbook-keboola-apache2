@@ -80,6 +80,17 @@ execute "extract-certificates" do
   group "root"
 end
 
+## PHP module
+file "#{node['apache']['dir']}/conf.d/php.conf" do
+  action :delete
+  backup false
+end
+
+apache_module 'php5' do
+  conf true
+  filename 'libphp-5.5.so'
+end
+
 directory "/www" do
   owner "root"
   group "root"
