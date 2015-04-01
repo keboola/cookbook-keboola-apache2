@@ -88,7 +88,7 @@ end
 
 apache_module 'php5' do
   conf true
-  filename 'libphp-5.5.so'
+  filename 'libphp-5.6.so'
 end
 
 directory "/www" do
