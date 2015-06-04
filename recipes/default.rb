@@ -17,7 +17,6 @@ user "apache" do
   gid "apache"
 end
 
-include_recipe "aws"
 include_recipe "apache2"
 
 # apache2 cookbook fix (runs service[packageName] -> httpd24)
@@ -60,11 +59,8 @@ end
 apache_sysconfig_template = resources(:template => "/etc/sysconfig/#{node['apache']['package']}")
 apache_sysconfig_template.cookbook "keboola-apache2"
 
-aws_s3_file "/tmp/ssl-keboola.com.tar.gz" do
-  bucket "keboola-configs"
-  remote_path "certificates/ssl-keboola.com-2014-11.tar.gz"
-  aws_access_key_id node[:aws][:aws_access_key_id]
-  aws_secret_access_key node[:aws][:aws_secret_access_key]
+execute "download certificaties from s3" do
+  command "aws s3 cp s3://keboola-configs/certificates/ssl-keboola.com-2014-11.tar.gz /tmp/ssl-keboola.com.tar.gz"
 end
 
 directory "#{node['apache']['dir']}/ssl" do
