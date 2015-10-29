@@ -60,7 +60,7 @@ apache_sysconfig_template = resources(:template => "/etc/sysconfig/#{node['apach
 apache_sysconfig_template.cookbook "keboola-apache2"
 
 execute "download certificaties from s3" do
-  command "aws s3 cp s3://keboola-configs/certificates/ssl-keboola.com-2015-11.tar.gz /tmp/ssl-keboola.com.tar.gz"
+  command "aws s3 cp s3://keboola-configs/certificates/ssl-keboola.com.tar.gz /tmp/ssl-keboola.com.tar.gz"
 end
 
 directory "#{node['apache']['dir']}/ssl" do
