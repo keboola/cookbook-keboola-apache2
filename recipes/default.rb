@@ -61,7 +61,7 @@ apache_sysconfig_template = resources(:template => "/etc/sysconfig/#{node['apach
 apache_sysconfig_template.cookbook "keboola-apache2"
 
 aws_s3_file "/tmp/ssl-keboola.com.tar.gz" do
-  bucket "keboola-configs"
+  bucket "#{node['keboola-apache']['certificates-bucket']}"
   remote_path "certificates/ssl-keboola.com.tar.gz"
   aws_access_key_id node[:aws][:aws_access_key_id]
   aws_secret_access_key node[:aws][:aws_secret_access_key]
