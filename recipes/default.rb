@@ -67,6 +67,15 @@ aws_s3_file "/tmp/ssl-keboola.com.tar.gz" do
   aws_secret_access_key node[:aws][:aws_secret_access_key]
 end
 
+execute "download certificaties from s3" do
+  command "aws s3 cp s3://#{node['keboola-apache']['certificates-bucket']}/certificates/ssl-keboola.com.tar.gz /tmp/ssl-keboola.com.tar.gz --region #{node['aws']['region']}"
+  environment(
+    'AWS_ACCESS_KEY_ID' => node['aws']['aws_access_key_id'],
+    'AWS_SECRET_ACCESS_KEY' => node['aws']['aws_secret_access_key']
+  )
+end
+
+
 directory "#{node['apache']['dir']}/ssl" do
   owner "root"
   group "root"
