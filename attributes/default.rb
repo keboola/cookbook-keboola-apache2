@@ -10,3 +10,10 @@ default['apache']['default_modules'] = %w[
 ]
 
 default['keboola-apache']['certificates-bucket'] = 'keboola-configs'
+
+default['apache']['prefork']['startservers']        = 5
+default['apache']['prefork']['minspareservers']     = 5
+default['apache']['prefork']['maxspareservers']     = 10
+default['apache']['prefork']['serverlimit']         = 256
+default['apache']['prefork']['maxrequestworkers']   = 256
+default['apache']['prefork']['maxconnectionsperchild'] = 10_000
