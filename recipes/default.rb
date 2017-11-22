@@ -19,6 +19,13 @@ user "apache" do
   home '/home/apache'
 end
 
+directory '/home/apache' do
+  owner 'apache'
+  group 'apache'
+  mode '0755'
+  action :create
+end
+
 include_recipe "aws"
 include_recipe "apache2"
 
