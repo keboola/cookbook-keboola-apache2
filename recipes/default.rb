@@ -38,7 +38,7 @@ service 'apache2' do
   service_name 'httpd'
   start_command '/etc/init.d/httpd start'
   reload_command '/etc/init.d/httpd graceful'
-  restart_command '/ect/init.d/httpd restart'
+  restart_command '/etc/init.d/httpd restart'
   status_command '/etc/init.d/httpd status'
   stop_command '/etc/init.d/httpd stop'
   supports [:start, :restart, :reload, :status]
