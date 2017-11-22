@@ -15,6 +15,8 @@ end
 
 user "apache" do
   gid "apache"
+  manage_home true
+  home '/home/apache'
 end
 
 include_recipe "aws"
@@ -49,4 +51,8 @@ directory "/www" do
   group "root"
   mode 0555
   action :create
+end
+
+execute "set apache home" do
+  command "echo \"HOME=/home/apache\" >> /etc/sysconfig/httpd"
 end
