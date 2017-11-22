@@ -33,6 +33,21 @@ include_recipe "apache2"
 r = resources(service: 'apache2')
 r.service_name('httpd')
 
+# override commands, default service httpd start does not source /etc/sysconfig/httpd
+service 'apache2' do
+  service_name 'httpd'
+  start_command '/etc/init.d/httpd start'
+  reload_command '/etc/init.d/httpd restart'
+  #restart_command '/etc/init.d/httpd restart'
+  status_command '/etc/init.d/httpd status'
+  stop_command '/etc/init.d/httpd stop'
+  supports [:start, :restart, :reload, :status]
+  action [:enable, :start]
+  only_if "#{node['apache']['binary']} -t", :environment => { 'APACHE_LOG_DIR' => node['apache']['log_dir'] }, :timeout => 2
+end
+
+
+
 
 apache_default_template = resources(:template => "apache2.conf")
 apache_default_template.cookbook "keboola-apache2"
@@ -62,4 +77,8 @@ end
 
 execute "set apache home" do
   command "echo \"HOME=/home/apache\" >> /etc/sysconfig/httpd"
+  notifies :reload, 'service[apache2]', :delayed
 end
+
+
+
